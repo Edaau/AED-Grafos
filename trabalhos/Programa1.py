@@ -1,6 +1,8 @@
-def Caso_a():
-    n = int(input("Insira o valor de n: "))
-    V = []
+def Gera_Matriz(m,n):
     for i in range(0,n):
-        V[i] = n
-    
+        m.append(0)
+        m[i] = []
+        for j in range(0,n):
+            m[i].append([])
+def Funcionalidade_a():
+    n

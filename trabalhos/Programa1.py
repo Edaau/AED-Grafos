@@ -1,10 +1,11 @@
-def Gera_Matriz(M,n):
+def Gera_Matriz(M,n,t):
     for i in range(0,n):
         M.append(0)
         M[i] = []
-        for j in range(0,n):
+        for j in range(0,t):
             M[i].append([])
-def Funcionalidade_a(M, n, G):
+
+def Funcionalidade_a(M, n, G, h):
     cont = 0
     for i in range(0,n):
         for j in range(0,n):
@@ -15,20 +16,30 @@ def Funcionalidade_a(M, n, G):
                 if resposta == "S" or resposta == "s":
                     M[i][j] = 1
                     cont += 1
-                else if resposta == "N" or respota == "n":
+                elif resposta == "N" or respota == "n":
                     M[i][j] = 0
                 else:
                     print("Insira uma resposta valida")
                     exit(1)
-                    
+    name = input("Insira o nome do grafo: ")
+    G[h][0] = name
+    G[h][1] = M
+    G[h][2] = cont
 
 
-
-
-
-M = []
-n= 5
-Gera_Matriz(m, n)
 G = []
-grafos = int(input)
-Funcionalidade_a(m, n, G)
+grafos = input("Quantos Grafos deseja inserir? ")
+if(grafos.isNumeric()):
+    Gera_Matriz(G, int(grafos), 3)
+else:
+    print("Insira um numero valido.")
+    exit(1)
+for i in range(0, int(grafos)):
+    M = []
+    n = input("Quantos vertices existem nesse grafo? ")
+    if(n.isNumeric()):
+        Gera_Matriz(M,n,n)
+    else:
+        print("Insira um numero valido.")
+        exit(1)
+    Funcionalidade_a(M, n, G, h)

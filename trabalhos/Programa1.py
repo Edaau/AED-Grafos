@@ -36,7 +36,16 @@ def Funcionalidade_a(M, n, G, h):
             print(M[i][j], end= ' ')
         print()
     print("O valor de |E|: %d" % cont)
-
+def Funcionalidade_b(G, name, grafos):
+    for i in range(0, grafos):
+        if G[i][0] == name:
+            for k in range(0,len(G[i][1])):
+                for j in range(0,len(G[i][1])):
+                    print(G[i][1][k][j], end= ' ')
+                print()
+            print("O valor de |E|: %d" % G[i][2])
+        else:
+            print("Grafo nao encontrado.")
 
 G = []
 grafos = input("Quantos Grafos deseja inserir? ")
@@ -54,3 +63,11 @@ for i in range(0, int(grafos)):
         print("Insira um numero valido.")
         exit(1)
     Funcionalidade_a(M, n, G, i)
+pergunta = input("Deseja encontrar algum grafo?: Responda com S/N ")
+if pergunta == "S" or pergunta == "s":
+    nome = input("Insira o nome do grafo que deseja procurar: ")
+    Funcionalidade_b(G, nome, int(grafos))
+elif pergunta == "N" or pergunta == "n":
+    exit(0)
+else:
+    print("Entre com uma resposta valida na proxima execucao.")

@@ -4,6 +4,56 @@ def Gera_Matriz(M,n,t):
         M[i] = []
         for j in range(0,t):
             M[i].append([])
+def Gera_Matriz_Completo(M,n,G,h):
+    for i in range(0,int(n)):
+        for j in range(0,int(n)):
+            if i == j:
+                M[i][j] = 0
+                M[j][i] = 0
+            elif M[j][i] == 0:
+                next
+            elif M[i][j] == 1:
+                next
+            elif i != j:
+                M[i][j] = 1
+                M[j][i] = 1
+    name = "completo_%d" % n
+    G[h][0] = name
+    G[h][1] = M
+    cont = (n*(n-1))/2
+    G[h][2] = cont
+    for i in range(0,int(n)):
+        for j in range(0,int(n)):
+            print(M[i][j], end= ' ')
+        print()
+    print("O valor de |E|: %d" % cont)
+
+def Gera_Matriz_Bipartido(M,n,m,G,h):
+    total = int(n) + int(m)
+    for i in range(0,total):
+        for j in range(0,total):
+            if M[j][i] == 0:
+                next
+            else:
+                M[i][j] = 0
+                M[j][i] = 0
+
+    for i in range(0,int(n)):
+        for j in range(int(n),total):
+            M[i][j] = 1
+            M[j][i] = 1
+    name = "bipartido_completo_%d%d" % (int(n),int(m))
+    G[h][0] = name
+    G[h][1] = M
+    cont = int(n)*int(m)
+    G[h][2] = cont
+    for i in range(0,total):
+        for j in range(0,total):
+            print(M[i][j], end= ' ')
+        print()
+    print("O valor de |E|: %d" % cont)
+
+
 
 def Funcionalidade_a(M, n, G, h):
     cont = 0
@@ -36,6 +86,7 @@ def Funcionalidade_a(M, n, G, h):
             print(M[i][j], end= ' ')
         print()
     print("O valor de |E|: %d" % cont)
+
 def Funcionalidade_b(G, name, grafos):
     for i in range(0, grafos):
         if G[i][0] == name:
@@ -47,7 +98,8 @@ def Funcionalidade_b(G, name, grafos):
             exit(0)
     print("Grafo nao encontrado.")
 
-    
+ 
+
 
 G = []
 grafos = input("Quantos Grafos deseja inserir? ")

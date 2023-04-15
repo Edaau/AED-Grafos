@@ -26,6 +26,7 @@ def Gera_Matriz_Completo(M,n,G,h):
         for j in range(0,int(n)):
             print(M[i][j], end= ' ')
         print()
+    print(name)
     print("O valor de |E|: %d" % cont)
 
 def Gera_Matriz_Bipartido(M,n,m,G,h):
@@ -51,6 +52,7 @@ def Gera_Matriz_Bipartido(M,n,m,G,h):
         for j in range(0,total):
             print(M[i][j], end= ' ')
         print()
+    print(name)
     print("O valor de |E|: %d" % cont)
 
 def Gera_Matriz_Estrela(M,n,G,h):
@@ -74,6 +76,7 @@ def Gera_Matriz_Estrela(M,n,G,h):
         for j in range(0,int(n)):
             print(M[i][j], end= ' ')
         print()
+    print(name)
     print("O valor de |E|: %d" % cont)
 
 def Funcionalidade_a(M, n, G, h):

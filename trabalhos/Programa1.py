@@ -44,8 +44,10 @@ def Funcionalidade_b(G, name, grafos):
                     print(G[i][1][k][j], end= ' ')
                 print()
             print("O valor de |E|: %d" % G[i][2])
-        else:
-            print("Grafo nao encontrado.")
+            exit(0)
+    print("Grafo nao encontrado.")
+
+    
 
 G = []
 grafos = input("Quantos Grafos deseja inserir? ")

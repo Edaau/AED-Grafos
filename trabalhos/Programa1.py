@@ -78,6 +78,142 @@ def Gera_Matriz_Estrela(M,n,G,h):
         print()
     print(name)
     print("O valor de |E|: %d" % cont)
+def Gera_Matriz_Caminho(M,n,G,h):
+    for i in range(0,int(n)):
+        for j in range(0,int(n)):
+            if M[j][i] == 0:
+                next
+            else:
+                M[i][j] = 0
+                M[j][i] = 0
+    cont = 0
+    for i in range(0,int(n)-1):
+        M[i][i+1] = 1
+        M[i+1][i] = 1
+        cont += 1
+    name = "caminho_%d" % (int(n))
+    G[h][0] = name
+    G[h][1] = M
+    G[h][2] = cont
+    for i in range(0,int(n)):
+        for j in range(0,int(n)):
+            print(M[i][j], end= ' ')
+        print()
+    print(name)
+    print("O valor de |E|: %d" % cont)
+    
+def Gera_Matriz_Ciclo(M,n,G,h):
+    for i in range(0,int(n)):
+        for j in range(0,int(n)):
+            if M[j][i] == 0:
+                next
+            else:
+                M[i][j] = 0
+                M[j][i] = 0
+    cont = int(n)
+    for i in range(0,int(n)):
+        M[i][(i+1)%int(n)] = 1
+        M[i][(i-1)%int(n)] = 1
+    M[0][int(n)-1] = 1
+    M[int(n)-1][0] = 1
+    name = "ciclo_%d" % (int(n))
+    G[h][0] = name
+    G[h][1] = M
+    G[h][2] = cont
+    for i in range(0,int(n)):
+        for j in range(0,int(n)):
+            print(M[i][j], end= ' ')
+        print()
+    print(name)
+    print("O valor de |E|: %d" % cont)
+
+def Gera_Matriz_Roda(M,n,G,h):
+    for i in range(0,int(n)+1):
+        for j in range(0,int(n)+1):
+            if M[j][i] == 0:
+                next
+            else:
+                M[i][j] = 0
+                M[j][i] = 0
+    cont = 2*int(n)
+    for i in range(0,int(n)):
+        M[i][(i+1)%int(n)] = 1
+        M[i][(i-1)%int(n)] = 1
+    M[0][int(n)-1] = 1
+    M[int(n)-1][0] = 1
+    for i in range(0,int(n)+1):
+        for j in range(0,int(n)+1):
+            if i == int(n) or j == int(n):
+                M[i][j] = 1
+    M[int(n)][int(n)] = 0
+    name = "roda_%d" % (int(n))
+    G[h][0] = name
+    G[h][1] = M
+    G[h][2] = cont
+    for i in range(0,int(n)+1):
+        for j in range(0,int(n)+1):
+            print(M[i][j], end= ' ')
+        print()
+    print(name)
+    print("O valor de |E|: %d" % cont)
+
+def Gera_Matriz_Cubo(M,n,G,h):
+    if int(n) < 2:
+        for i in range(0,int(n)+1):
+            for j in range(0,int(n)+1):
+                if i == j:
+                    M[i][j] = 0
+                    M[j][i] = 0
+                elif M[j][i] == 0:
+                    next
+                elif M[i][j] == 1:
+                    next
+                elif i != j:
+                    M[i][j] = 1
+                    M[j][i] = 1
+        name = "cubo_%d" % int(n)
+        G[h][0] = name
+        G[h][1] = M
+        cont = (int(n)*(int(n)-1))/2
+        G[h][2] = cont
+        for i in range(0,int(n)):
+            for j in range(0,int(n)):
+                print(M[i][j], end= ' ')
+            print()
+        print(name)
+        print("O valor de |E|: %d" % cont)
+    else:
+        for i in range(0,2**int(n)):
+            for j in range(0,2**int(n)):
+                if M[j][i] == 0:
+                    next
+                else:
+                    M[i][j] = 0
+                    M[j][i] = 0
+        cont = (2**(int(n)))*int(n)
+        for i in range(0,2**int(n)):
+            for j in range(0,int(n)):
+                if ((i >> j) & 1) == 0:
+                    v = i + (1 << j)
+                    if v < 2**int(n):
+                        M[i][v] = 1
+                        M[v][i] = 1 
+                else:
+                    v = i - (1 << j)
+                    if v >= 0:
+                        M[i][v] = 1
+                        M[v][i] = 1
+        name = "cubo_%d" % (int(n))
+        cont = cont//2
+        G[h][0] = name
+        G[h][1] = M
+        G[h][2] = cont
+        for i in range(0,2**int(n)):
+            for j in range(0,2**int(n)):
+                print(M[i][j], end= ' ')
+            print()
+        print(name)
+        print("O valor de |E|: %d" % cont)
 
 def Funcionalidade_a(M, n, G, h):
     cont = 0
@@ -166,11 +302,47 @@ if especial == "S" or especial == "s":
                 print("Insira um numero valido.")
                 exit(1)
             Gera_Matriz_Estrela(M, n, G, i)
+        elif classe.upper() == "CAMINHO":
+            M = []
+            n = input("Quantos vertices existem nesse grafo? ")
+            if(n.isnumeric()):
+             Gera_Matriz(M,int(n),int(n))
+            else:
+                print("Insira um numero valido.")
+                exit(1)
+            Gera_Matriz_Caminho(M, n, G, i)
+        elif classe.upper() == "CICLO":
+            M = []
+            n = input("Quantos vertices existem nesse grafo? ")
+            if(n.isnumeric() and int(n) >= 3):
+             Gera_Matriz(M,int(n),int(n))
+            else:
+                print("Insira um numero valido.")
+                exit(1)
+            Gera_Matriz_Ciclo(M, n, G, i)
+        elif classe.upper() == "RODA":
+            M = []
+            n = input("Quantos vertices existem nesse grafo? ")
+            if(n.isnumeric() and int(n) >= 3):
+             Gera_Matriz(M,int(n)+1,int(n)+1)
+            else:
+                print("Insira um numero valido.")
+                exit(1)
+            Gera_Matriz_Roda(M, int(n), G, i)
+        elif classe.upper() == "CUBO":
+            M = []
+            n = input("Insira o valor de n:")
+            if(n.isnumeric()):
+             Gera_Matriz(M,2**int(n),2**int(n))
+            else:
+                print("Insira um numero valido.")
+                exit(1)
+            Gera_Matriz_Cubo(M, n, G, i)
         else:
             print("Insira uma classe valida na proxima execucao")
             exit(1)
 
-elif pergunta == "N" or pergunta == "n":
+elif especial == "N" or especial == "n":
     for i in range(0, int(grafos)):
         M = []
         n = input("Quantos vertices existem nesse grafo? ")

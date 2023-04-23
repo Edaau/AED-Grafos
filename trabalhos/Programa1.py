@@ -158,26 +158,31 @@ def Gera_Matriz_Roda(M,n,G,h):
     print("O valor de |E|: %d" % cont)
 
 def Gera_Matriz_Cubo(M,n,G,h):
-    if int(n) < 2:
-        for i in range(0,int(n)+1):
-            for j in range(0,int(n)+1):
-                if i == j:
-                    M[i][j] = 0
-                    M[j][i] = 0
-                elif M[j][i] == 0:
-                    next
-                elif M[i][j] == 1:
-                    next
-                elif i != j:
-                    M[i][j] = 1
-                    M[j][i] = 1
-        name = "cubo_%d" % int(n)
+    if int(n) == 0:
+        M[0][0] = 0
+        name = "cubo_%d" % (int(n))
+        cont = 0
         G[h][0] = name
         G[h][1] = M
-        cont = (int(n)*(int(n)-1))/2
         G[h][2] = cont
-        for i in range(0,int(n)):
-            for j in range(0,int(n)):
+        for i in range(0,2**int(n)):
+            for j in range(0,2**int(n)):
+                print(M[i][j], end= ' ')
+            print()
+        print(name)
+        print("O valor de |E|: %d" % cont)
+    elif int(n) ==1:
+        M[0][0] = 0
+        M[0][1] = 1
+        M[1][0] = 1
+        M[1][1] = 0
+        cont = 1
+        name = "cubo_%d" % (int(n))
+        G[h][0] = name
+        G[h][1] = M
+        G[h][2] = cont
+        for i in range(0,2**int(n)):
+            for j in range(0,2**int(n)):
                 print(M[i][j], end= ' ')
             print()
         print(name)

@@ -220,6 +220,40 @@ def Gera_Matriz_Cubo(M,n,G,h):
         print(name)
         print("O valor de |E|: %d" % cont)
 
+def is_conexo(M):
+    num_vertices = len(M)
+    visitados = set()
+    atual = 0
+    visitados.add(atual)
+    pilha = [atual]
+    while pilha:
+        atual = pilha.pop()
+        for adjacente in range(num_vertices):
+            if M[atual][adjacente] == 1 and adjacente not in visitados:
+                visitados.add(adjacente)
+                pilha.append(adjacente)
+    
+    return len(visitados) == num_vertices
+
+def num_componentes_conexas(M):
+    num_vertices = len(M)
+    visitados = set()
+    num_componentes = 0
+    for i in range(num_vertices):
+        if i not in visitados:
+            num_componentes += 1
+            atual = i
+            visitados.add(atual)
+            pilha = [atual]
+            while pilha:
+                atual = pilha.pop()
+                for adjacente in range(num_vertices):
+                    if M[atual][adjacente] == 1 and adjacente not in visitados:
+                        visitados.add(adjacente)
+                        pilha.append(adjacente)
+    
+    return num_componentes
+    
 def Funcionalidade_a(M, n, G, h):
     cont = 0
     for i in range(0,int(n)):
@@ -260,6 +294,13 @@ def Funcionalidade_b(G, name, grafos):
                     print(G[i][1][k][j], end= ' ')
                 print()
             print("O valor de |E|: %d" % G[i][2])
+            if is_conexo(M):
+                print("O grafo é conexo")
+            else:
+                print("O grafo não é conexo")
+
+            num_componentes = num_componentes_conexas(M)
+            print("O grafo possui", num_componentes, "componente(s) conexa(s)")
             exit(0)
     print("Grafo nao encontrado.")
 
@@ -360,10 +401,12 @@ elif especial == "N" or especial == "n":
 else:
     print("Entre com uma resposta valida na proxima execucao.")
 
-pergunta = input("Deseja encontrar algum grafo?: Responda com S/N ")
+pergunta = input("Deseja encontrar algum grafo e saber se ele é conexo?: Responda com S/N ")
 if pergunta == "S" or pergunta == "s":
     nome = input("Insira o nome do grafo que deseja procurar: ")
     Funcionalidade_b(G, nome, int(grafos))
+    
+
 elif pergunta == "N" or pergunta == "n":
     exit(0)
 else:
